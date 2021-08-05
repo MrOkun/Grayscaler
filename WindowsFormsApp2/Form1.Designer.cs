@@ -172,6 +172,7 @@ namespace WindowsFormsApp2
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Grayscaler";
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.preImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.postImage)).EndInit();
             this.ResumeLayout(false);

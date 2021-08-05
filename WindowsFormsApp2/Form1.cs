@@ -200,7 +200,7 @@ namespace WindowsFormsApp2
                                 Color pixelColor = image1.GetPixel(x, y);
 
                                 var grayscaleColor = (nums.FindMax(pixelColor.R, pixelColor.G, pixelColor.B) + nums.FindMin(pixelColor.R, pixelColor.G, pixelColor.B)) / 2;
-                                
+
                                 Color newColor = Color.FromArgb((int)grayscaleColor, (int)grayscaleColor, (int)grayscaleColor);
                                 image1.SetPixel(x, y, newColor);
                                 //Debug.WriteLine((int)grayscaleColor);
@@ -289,6 +289,12 @@ namespace WindowsFormsApp2
                 AlgorithmWarning = false;
                 MessageBox.Show("Red, Green, Blue algorithm can be rube and uncorrect!");
             }
+        }
+
+        private void Form_Paint(object sender, PaintEventArgs e)
+        {
+            this.Height = 330;
+            this.Width = 354;
         }
     }
 }
