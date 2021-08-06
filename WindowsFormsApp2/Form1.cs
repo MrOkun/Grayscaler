@@ -10,7 +10,8 @@ namespace WindowsFormsApp2
     public partial class Form1 : Form
     {
         Bitmap image1;
-        int change = 4;
+        int change = 0;
+        int factor = 1;
         string path = @"C:\Users\User\source\repos\WindowsFormsApp2\WindowsFormsApp2\bin\Debug\Img\coffie.jpg";
         bool AlgorithmWarning = true;
 
@@ -69,9 +70,15 @@ namespace WindowsFormsApp2
                         Render();
                         break;
                     }
-                case "Desaturation":
+                case "Desaturation": //by Desaturation colors
                     {
                         change = 6;
+                        Render();
+                        break;
+                    }
+                case "Dithering": //Dithering-Floyd Algorithm
+                    {
+                        change = 7;
                         Render();
                         break;
                     }
@@ -208,6 +215,229 @@ namespace WindowsFormsApp2
                         }
                         break;
                     }
+                case 7: //dithering
+                    {
+                        int x, y;
+
+                        for (x = 1; x < image1.Width - 1; x++)
+                        {
+                            for (y = 0; y < image1.Height - 1; y++)
+                            {
+                                Color pixelColor = image1.GetPixel(x, y);
+
+                                float oldR = pixelColor.R;
+                                float oldG = pixelColor.G;
+                                float oldB = pixelColor.B;
+
+
+
+
+                                int newR = (int)((float)Math.Round(factor * oldR / 255, 0) * (255 / factor));
+                                int newG = (int)((float)Math.Round(factor * oldG / 255, 0) * (255 / factor));
+                                int newB = (int)((float)Math.Round(factor * oldB / 255, 0) * (255 / factor));
+
+                                Color newColor = Color.FromArgb(newR, newG, newB);
+
+                                float errR = oldR - newR;
+                                float errG = oldG - newG;
+                                float errB = oldB - newB;
+
+                                Color c = image1.GetPixel(x + 1, y); //1
+                                float r = c.R;
+                                float g = c.G;
+                                float b = c.B;
+
+                                r = r + errR * 7 / 16;
+                                g = g + errG * 7 / 16;
+                                b = b + errB * 7 / 16;
+
+                                r = (float)Math.Round(r, 0);
+                                g = (float)Math.Round(g, 0);
+                                b = (float)Math.Round(b, 0);
+
+                                if (r > 255)
+                                {
+                                    r = 255;
+                                }
+                                if (r < 0)
+                                {
+                                    r = 0;
+                                }
+                                if (g > 255)
+                                {
+                                    g = 255;
+                                }
+                                if (g < 0)
+                                {
+                                    g = 0;
+                                }
+                                if (b > 255)
+                                {
+                                    b = 255;
+                                }
+                                if (b < 0)
+                                {
+                                    b = 0;
+                                }
+
+                                Color ErrColor = Color.FromArgb((int)r, (int)g, (int)b);
+                                image1.SetPixel(x + 1, y, ErrColor);
+
+
+                                c = image1.GetPixel(x - 1, y + 1); //2
+                                r = c.R;
+                                g = c.G;
+                                b = c.B;
+
+                                r = r + errR * 3 / 16;
+                                g = g + errG * 3 / 16;
+                                b = b + errB * 3 / 16;
+
+                                r = (float)Math.Round(r, 0);
+                                g = (float)Math.Round(g, 0);
+                                b = (float)Math.Round(b, 0);
+
+                                if (r > 255)
+                                {
+                                    r = 255;
+                                }
+                                if (r < 0)
+                                {
+                                    r = 0;
+                                }
+                                if (g > 255)
+                                {
+                                    g = 255;
+                                }
+                                if (g < 0)
+                                {
+                                    g = 0;
+                                }
+                                if (b > 255)
+                                {
+                                    b = 255;
+                                }
+                                if (b < 0)
+                                {
+                                    b = 0;
+                                }
+
+                                ErrColor = Color.FromArgb((int)r, (int)g, (int)b);
+                                image1.SetPixel(x - 1, y + 1, ErrColor);
+
+                                c = image1.GetPixel(x, y + 1); //3
+                                r = c.R;
+                                g = c.G;
+                                b = c.B;
+
+                                r = r + errR * 5 / 16;
+                                g = g + errG * 5 / 16;
+                                b = b + errB * 5 / 16;
+
+                                r = (float)Math.Round(r, 0);
+                                g = (float)Math.Round(g, 0);
+                                b = (float)Math.Round(b, 0);
+
+
+                                if (r > 255)
+                                {
+                                    r = 255;
+                                }
+                                if (r < 0)
+                                {
+                                    r = 0;
+                                }
+                                if (g > 255)
+                                {
+                                    g = 255;
+                                }
+                                if (g < 0)
+                                {
+                                    g = 0;
+                                }
+                                if (b > 255)
+                                {
+                                    b = 255;
+                                }
+                                if (b < 0)
+                                {
+                                    b = 0;
+                                }
+
+                                ErrColor = Color.FromArgb((int)r, (int)g, (int)b);
+                                image1.SetPixel(x, y + 1, ErrColor);
+
+
+                                c = image1.GetPixel(x + 1, y + 1); //4
+                                r = c.R;
+                                g = c.G;
+                                b = c.B;
+
+                                r = r + errR * 1 / 16;
+                                g = g + errG * 1 / 16;
+                                b = b + errB * 1 / 16;
+
+                                r = (float)Math.Round(r, 0);
+                                g = (float)Math.Round(g, 0);
+                                b = (float)Math.Round(b, 0);
+
+
+                                if (r > 255)
+                                {
+                                    r = 255;
+                                }
+                                if (r < 0)
+                                {
+                                    r = 0;
+                                }
+                                if (g > 255)
+                                {
+                                    g = 255;
+                                }
+                                if (g < 0)
+                                {
+                                    g = 0;
+                                }
+                                if (b > 255)
+                                {
+                                    b = 255;
+                                }
+                                if (b < 0)
+                                {
+                                    b = 0;
+                                }
+
+                                ErrColor = Color.FromArgb((int)r, (int)g, (int)b);
+                                image1.SetPixel(x + 1, y + 1, ErrColor);
+
+
+                                /*
+                                image1.SetPixel(x - 1, y, newColor);
+                                image1.SetPixel(x - 1, y + 1, newColor);
+                                image1.SetPixel(x, y + 1, newColor);
+                                image1.SetPixel(x + 1, y + 1, newColor);
+                                */
+                            }
+                        }
+
+                        x = 0;
+                        y = 0;
+
+                        for (x = 0; x < image1.Width; x++)
+                        {
+                            for (y = 0; y < image1.Height; y++)
+                            {
+                                Color pixelColor = image1.GetPixel(x, y);
+                                var grayscaleColor = 0.299 * pixelColor.R + 0.587 * pixelColor.G + 0.114 * pixelColor.B;
+                                grayscaleColor = Math.Ceiling(grayscaleColor);
+
+                                Color newColor = Color.FromArgb((int)grayscaleColor, (int)grayscaleColor, (int)grayscaleColor);
+                                image1.SetPixel(x, y, newColor);
+                                //Debug.WriteLine((int)grayscaleColor);
+                            }
+                        }
+                        break;
+                    }
                 default: //bruh moment...
                     {
                         int x, y;
@@ -293,8 +523,15 @@ namespace WindowsFormsApp2
 
         private void Form_Paint(object sender, PaintEventArgs e)
         {
-            this.Height = 330;
+            this.Height = 407;
             this.Width = 354;
+        }
+
+        private void trackBar1_ValueChanged(object sender, EventArgs e)
+        {
+            DitheringFactor.Text = $"Dithering Factor : {factor}";
+            factor = trackBar1.Value;
+            Render();
         }
     }
 }

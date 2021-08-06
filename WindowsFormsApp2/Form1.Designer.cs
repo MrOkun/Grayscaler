@@ -40,8 +40,11 @@ namespace WindowsFormsApp2
             this.Load = new System.Windows.Forms.Button();
             this.ImageName = new System.Windows.Forms.Label();
             this.SaveButton = new System.Windows.Forms.Button();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.DitheringFactor = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.preImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.postImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // preImage
@@ -85,7 +88,8 @@ namespace WindowsFormsApp2
             "Blue",
             "Average",
             "Average (Human eye correcting)",
-            "Desaturation"});
+            "Desaturation",
+            "Dithering"});
             this.selectBox.Location = new System.Drawing.Point(168, 195);
             this.selectBox.Name = "selectBox";
             this.selectBox.Size = new System.Drawing.Size(150, 21);
@@ -154,11 +158,35 @@ namespace WindowsFormsApp2
             this.SaveButton.UseVisualStyleBackColor = true;
             this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
+            // trackBar1
+            // 
+            this.trackBar1.LargeChange = 1;
+            this.trackBar1.Location = new System.Drawing.Point(15, 311);
+            this.trackBar1.Maximum = 30;
+            this.trackBar1.Minimum = 1;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(306, 45);
+            this.trackBar1.TabIndex = 8;
+            this.trackBar1.Value = 1;
+            this.trackBar1.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
+            // 
+            // DitheringFactor
+            // 
+            this.DitheringFactor.AutoSize = true;
+            this.DitheringFactor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.DitheringFactor.Location = new System.Drawing.Point(12, 282);
+            this.DitheringFactor.Name = "DitheringFactor";
+            this.DitheringFactor.Size = new System.Drawing.Size(110, 13);
+            this.DitheringFactor.TabIndex = 9;
+            this.DitheringFactor.Text = "Dithering Factor : ";
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(238)))), ((int)(((byte)(220)))));
-            this.ClientSize = new System.Drawing.Size(338, 291);
+            this.ClientSize = new System.Drawing.Size(338, 368);
+            this.Controls.Add(this.DitheringFactor);
+            this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.ImageName);
             this.Controls.Add(this.Load);
@@ -175,6 +203,7 @@ namespace WindowsFormsApp2
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.preImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.postImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -192,6 +221,8 @@ namespace WindowsFormsApp2
         private System.Windows.Forms.Button Load;
         private System.Windows.Forms.Label ImageName;
         private System.Windows.Forms.Button SaveButton;
+        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Label DitheringFactor;
     }
 }
 
