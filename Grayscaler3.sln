@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grayscaler3", "Grayscaler3\Grayscaler3.csproj", "{D527A837-940B-407A-BE65-9D101ED78F9A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D527A837-940B-407A-BE65-9D101ED78F9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D527A837-940B-407A-BE65-9D101ED78F9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D527A837-940B-407A-BE65-9D101ED78F9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D527A837-940B-407A-BE65-9D101ED78F9A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BE734F03-768D-4CA2-BFAE-48C794CE5EB7}
+	EndGlobalSection
+EndGlobal
