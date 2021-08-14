@@ -128,8 +128,7 @@ namespace Grayscaler3
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(364, 311);
             this.Controls.Add(this.Save_Button);
             this.Controls.Add(this.Load_Image);
@@ -140,6 +139,7 @@ namespace Grayscaler3
             this.Controls.Add(this.Modified_Image);
             this.Controls.Add(this.Original_Image);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Grayscaler";
             this.SizeChanged += new System.EventHandler(this.Form_Sized);
