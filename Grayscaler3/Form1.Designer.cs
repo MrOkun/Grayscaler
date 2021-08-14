@@ -29,6 +29,7 @@ namespace Grayscaler3
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.Original_Image = new System.Windows.Forms.PictureBox();
             this.Modified_Image = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -138,8 +139,9 @@ namespace Grayscaler3
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Modified_Image);
             this.Controls.Add(this.Original_Image);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Grayscaler";
             this.SizeChanged += new System.EventHandler(this.Form_Sized);
             ((System.ComponentModel.ISupportInitialize)(this.Original_Image)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Modified_Image)).EndInit();
