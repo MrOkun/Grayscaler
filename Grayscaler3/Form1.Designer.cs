@@ -38,6 +38,7 @@ namespace Grayscaler3
             this.Method_Selector = new System.Windows.Forms.ComboBox();
             this.Load_Image = new System.Windows.Forms.Button();
             this.Save_Button = new System.Windows.Forms.Button();
+            this.Iteration_box = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.Original_Image)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Modified_Image)).BeginInit();
             this.SuspendLayout();
@@ -94,12 +95,14 @@ namespace Grayscaler3
             this.Method_Selector.FormattingEnabled = true;
             this.Method_Selector.Items.AddRange(new object[] {
             "All Channels (Original)",
-            "By Red channel (Uncorrect)",
-            "By Green channel (Uncorrect)",
-            "By Blue channel (Uncorrect)",
-            "Average",
+            "By Red channel (Rude)",
+            "By Green channel (Rude)",
+            "By Blue channel (Rude)",
+            "Average (All channels average )",
             "Luminance (Photoshop)",
-            "Desaturation"});
+            "Desaturation (Min&Max Channels averge)",
+            "Pasteurization (Colored)",
+            "Pasteurization (B&W)"});
             this.Method_Selector.Location = new System.Drawing.Point(187, 205);
             this.Method_Selector.Name = "Method_Selector";
             this.Method_Selector.Size = new System.Drawing.Size(165, 21);
@@ -126,10 +129,37 @@ namespace Grayscaler3
             this.Save_Button.UseVisualStyleBackColor = true;
             this.Save_Button.Click += new System.EventHandler(this.Save_Button_Click);
             // 
+            // Iteration_box
+            // 
+            this.Iteration_box.FormattingEnabled = true;
+            this.Iteration_box.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16"});
+            this.Iteration_box.Location = new System.Drawing.Point(295, 281);
+            this.Iteration_box.Name = "Iteration_box";
+            this.Iteration_box.Size = new System.Drawing.Size(57, 21);
+            this.Iteration_box.TabIndex = 9;
+            this.Iteration_box.SelectedIndexChanged += new System.EventHandler(this.Iteration_box_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(364, 311);
+            this.Controls.Add(this.Iteration_box);
             this.Controls.Add(this.Save_Button);
             this.Controls.Add(this.Load_Image);
             this.Controls.Add(this.Method_Selector);
@@ -160,6 +190,7 @@ namespace Grayscaler3
         private System.Windows.Forms.ComboBox Method_Selector;
         private System.Windows.Forms.Button Load_Image;
         private System.Windows.Forms.Button Save_Button;
+        private System.Windows.Forms.ComboBox Iteration_box;
     }
 }
 

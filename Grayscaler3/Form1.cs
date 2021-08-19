@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Grayscaler3
@@ -24,6 +17,8 @@ namespace Grayscaler3
             InitializeComponent();
             ImageDownload();
             Render();
+            Iteration_box.SelectedIndex = 0;
+            Iteration_box.Visible = false;
         }
 
         private void Image_Selector_Changed(object sender, EventArgs e)
@@ -40,7 +35,6 @@ namespace Grayscaler3
         private void Render()
         {
             _modifiedImage = new Bitmap(_path, true);
-            Modified_Image.Image = new Bitmap(_path, true);
             Original_Image.Image = new Bitmap(_path, true);
 
             int x, y;
@@ -51,7 +45,7 @@ namespace Grayscaler3
                 {
                     Color pixelColor = _modifiedImage.GetPixel(x, y);
 
-                    Color newColor = Algarithm(Method_Selector.SelectedIndex, pixelColor);
+                    Color newColor = Algarithm(Method_Selector.SelectedIndex, pixelColor, Iteration_box.SelectedIndex + 1);
                     _modifiedImage.SetPixel(x, y, newColor);
                 }
             }
@@ -59,7 +53,7 @@ namespace Grayscaler3
             Modified_Image.Image = _modifiedImage;
         }
 
-        private Color Algarithm(int way, Color pixelColor)
+        private Color Algarithm(int way, Color pixelColor, int iterations)
         {
             switch (way) 
             {
@@ -69,28 +63,40 @@ namespace Grayscaler3
                     }
                 case 0: //All channels.
                     {
+                        Iteration_box.Visible = false;
+
                         return Color.FromArgb(pixelColor.R, pixelColor.G, pixelColor.B);
                     }
                 case 1: //By Red channel.
                     {
+                        Iteration_box.Visible = false;
+
                         return Color.FromArgb(pixelColor.R, pixelColor.R, pixelColor.R);
                     }
                 case 2: //By Green channel.
                     {
+                        Iteration_box.Visible = false;
+
                         return Color.FromArgb(pixelColor.G, pixelColor.G, pixelColor.G);
                     }
                 case 3: //By Blue channel.
                     {
+                        Iteration_box.Visible = false;
+
                         return Color.FromArgb(pixelColor.B, pixelColor.B, pixelColor.B);
                     }
                 case 4: //Average
                     {
+                        Iteration_box.Visible = false;
+
                         var grayscaleColor = (pixelColor.R + pixelColor.G + pixelColor.B) / 3;
 
                         return Color.FromArgb(grayscaleColor, grayscaleColor, grayscaleColor);
                     }
                 case 5: //Luminance (Photoshop)
                     {
+                        Iteration_box.Visible = false;
+
                         var grayscaleColor = 0.299 * pixelColor.R + 0.587 * pixelColor.G + 0.114 * pixelColor.B;
                         grayscaleColor = Math.Ceiling(grayscaleColor);
 
@@ -98,12 +104,44 @@ namespace Grayscaler3
                     }
                 case 6: //Desaturation
                     {
+                        Iteration_box.Visible = false;
+
                         int Max = Math.Max(Math.Max(pixelColor.R, pixelColor.G), pixelColor.B);
                         int Min = Math.Min(Math.Min(pixelColor.R, pixelColor.G), pixelColor.B);
 
                         var grayscaleColor = (Max + Min) / 2;
 
                         return Color.FromArgb(grayscaleColor, grayscaleColor, grayscaleColor);
+                    }
+                case 7: //Pasteurization
+                    {
+                        Iteration_box.Visible = true;
+
+                        double r = pixelColor.R;
+                        double g = pixelColor.G;
+                        double b = pixelColor.B;
+
+                        r = Math.Round(iterations * r / 255) * (255 / iterations);
+                        g = Math.Round(iterations * g / 255) * (255 / iterations);
+                        b = Math.Round(iterations * b / 255) * (255 / iterations);
+
+                        return Color.FromArgb((int)r, (int)g, (int)b);
+                    }
+                case 8: //Pasteurization (b&w)
+                    {
+                        Iteration_box.Visible = true;
+
+                        double r = pixelColor.R;
+                        double g = pixelColor.G;
+                        double b = pixelColor.B;
+
+                        r = Math.Round(iterations * r / 255) * (255 / iterations);
+                        g = Math.Round(iterations * g / 255) * (255 / iterations);
+                        b = Math.Round(iterations * b / 255) * (255 / iterations);
+
+                        int grayscale = (int)Math.Round((r + g + b) / 3);
+
+                        return Color.FromArgb(grayscale, grayscale, grayscale);
                     }
             }
 
@@ -137,8 +175,8 @@ namespace Grayscaler3
 
         private void Form_Sized(object sender, EventArgs e)
         {
-            this.Height = 380;
-            this.Width = 350;
+            this.Height = 350;
+            this.Width = 380;
         }
 
         private void Load_Image_Click(object sender, EventArgs e)
@@ -171,6 +209,11 @@ namespace Grayscaler3
 
             Modified_Image.Image.Save(_standartFilePath);
             MessageBox.Show($"Image saved in {_standartFilePath}");
+        }
+
+        private void Iteration_box_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Render();
         }
     }
 }
